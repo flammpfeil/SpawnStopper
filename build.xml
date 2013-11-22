@@ -1,4 +1,4 @@
-<project name="BDDeobfer" basedir="../" default="test">
+<project name="SpawnStopper" basedir="../" default="test">
     <property environment="env" />
     <property file="buildspecs.properties" prefix="buildspecs" />
 
