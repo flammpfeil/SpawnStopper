@@ -5,6 +5,7 @@ import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntityMob;
+import net.minecraft.entity.monster.IMob;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -74,7 +75,7 @@ public class SpawnStopper {
 	public void livingSpawnEvent(LivingSpawnEvent.CheckSpawn event) {
 		if(event.world.getChunkFromBlockCoords((int)event.x, (int)event.z).getBlock(posX, posY, posZ) == block)
 			event.setResult(Event.Result.DENY);
-		else if(event.entityLiving instanceof EntityMob){
+		else if(event.entityLiving instanceof IMob){
 			int tmp = event.world.skylightSubtracted;
 			event.world.skylightSubtracted = 15;
 			int light = event.world.getBlockLightValue((int)event.x,(int)event.y,(int)event.z);
