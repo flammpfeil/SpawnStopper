@@ -5,7 +5,7 @@ minecraft mod
 
 本リポジトリの使い方
 ---------
-0. 開発環境の作成
+1. 開発環境の作成
     * 用意できてるなら不要です。
     1. 初期設定
         * 必要なファイルのDL、デコンパイル等をします
@@ -37,7 +37,7 @@ minecraft mod
             
             * サーバ名は任意で
                 
-1. eclipse編
+2. eclipse編
     1. デバッグまで
         1. リポジトリーCloneを作る
             * ビューを開いて、URLをCtrl+V辺りでペースト等、任意のディレクトリにClone作成します
@@ -61,10 +61,12 @@ minecraft mod
         * build.batを実行します
         * build/libs 配下にjarが生成されます。
 
-2. inteliJ IDEA編
+3. inteliJ IDEA編
     1. デバッグまで
         1. リポジトリーCloneを作る
-            * ※あらかじめgitのコマンドラインツールをインストール＆登録しておいてください。
+            * 適宜GITClone作れるツールで任意のフォルダへCloneしてください
+            * IDEA上で行う場合
+                * ※あらかじめgitのコマンドラインツールをインストール＆登録しておいてください。
             
                 > setting > "git"で検索 > git > git.exeの欄に自環境のパスを
 
@@ -73,13 +75,16 @@ minecraft mod
                 
                     > VCS>Checkout from Version Control>git
                     
-            * プロジェクトとして開くか聞かれるかもしれませんが No で
-        2. Moduleのインポート
-        
+                * プロジェクトとして開くか聞かれるかもしれませんが No で
+        2. 初期設定
+            * setup.batを実行して下さい。
+
+        3. Moduleのインポート
+            * 1でCloneしたリポジトリーの作業ディレクトリから setup.bat実行で生成された *.imlを選択します。
+
             > File > Import Module
-            
-            * 1でCloneしたリポジトリーの作業ディレクトリから build.gradleを開きましょう
-        3. 依存関係の設定
+
+        4. 依存関係の設定
             * Gradleタスクから setupDevWorkSpaceを実行します。
             * 自動で基本的に必要なライブラリのDLや初期設定がされます
             * ※本modでは特に追加ライブラリは無いので実行だけすれば終わりです。
@@ -90,8 +95,8 @@ minecraft mod
             
             > ForgeのModuleSettings > Dependenciesタブ > + > ModuleDependency > 2でインポートしたModule
             
-        4. デバッグ実行
+        5. デバッグ実行
             * Runから適宜 server / client 実行します。
-    5. ビルド
+    2. ビルド
         * Gradleタスクから build を実行します。
         * build/libs 配下にjarが生成されます。
