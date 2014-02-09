@@ -85,7 +85,6 @@ minecraft mod
             > File > Import Module
 
         4. 依存関係の設定
-            * Gradleタスクから setupDevWorkSpaceを実行します。
             * 自動で基本的に必要なライブラリのDLや初期設定がされます
             * ※本modでは特に追加ライブラリは無いので実行だけすれば終わりです。
             
