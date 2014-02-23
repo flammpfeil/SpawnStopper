@@ -93,4 +93,6 @@ minecraft mod
             * Runから適宜 server / client 実行します。
     2. ビルド
         * build.bat を実行します。
+            * Run/Debug Configurations に新規で Gradle欄に追加して、  
+              個別のbuild.gradleを選択 tasksにbuildを指定しても良いですが面倒です
         * build/libs 配下にjarが生成されます。
