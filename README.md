@@ -92,5 +92,5 @@ minecraft mod
         5. デバッグ実行
             * Runから適宜 server / client 実行します。
     2. ビルド
-        * Gradleタスクから build を実行します。
+        * build.bat を実行します。
         * build/libs 配下にjarが生成されます。
