@@ -17,7 +17,7 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "mc1.7.2-r1"
+version = "mc1.7.2-r2"
 group= "mods.flammpfeil.spawnstopper" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "SpawnStopper"
 

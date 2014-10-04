@@ -2,6 +2,7 @@ package mods.flammpfeil.spawnStopper;
 
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntityMob;
@@ -71,11 +72,11 @@ public class SpawnStopper {
         }
     }
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void livingSpawnEvent(LivingSpawnEvent.CheckSpawn event) {
 		if(event.world.getChunkFromBlockCoords((int)event.x, (int)event.z).getBlock(posX, posY, posZ) == block)
 			event.setResult(Event.Result.DENY);
-		else if(event.entityLiving instanceof IMob){
+ 		else if(event.entityLiving instanceof IMob){
 			int tmp = event.world.skylightSubtracted;
 			event.world.skylightSubtracted = 15;
 			int light = event.world.getBlockLightValue((int)event.x,(int)event.y,(int)event.z);
