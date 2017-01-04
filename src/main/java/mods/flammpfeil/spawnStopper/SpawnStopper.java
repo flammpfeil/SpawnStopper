@@ -7,6 +7,7 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.block.Block;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
@@ -26,12 +27,22 @@ public class SpawnStopper {
 	public static int posY = 1;
 	public static int posZ = 0;
 
+	public static boolean checkPlayer = true;
+	public static int distance = 128;
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent evt) {
 		mainConfiguration = new Configuration(evt.getSuggestedConfigurationFile());
 
 		try{
 			mainConfiguration.load();
+
+			Property propCheckPlayer;
+			propCheckPlayer = mainConfiguration.get(Configuration.CATEGORY_GENERAL, "checkPlayerPos", true);
+			checkPlayer = propCheckPlayer.getBoolean();
+			Property propCheckPlayerDistance;
+			propCheckPlayerDistance = mainConfiguration.get(Configuration.CATEGORY_GENERAL, "canSpawnDistance", distance);
+			distance = propCheckPlayerDistance.getInt();
 
 			Property propBlockId;
 			propBlockId = mainConfiguration.get(Configuration.CATEGORY_GENERAL, "spawnStopperBlockName", "minecraft:cobblestone", "Existing blockName");
@@ -74,9 +85,20 @@ public class SpawnStopper {
 
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public void livingSpawnEvent(LivingSpawnEvent.CheckSpawn event) {
-		if(event.world.getChunkFromBlockCoords((int)event.x, (int)event.z).getBlock(posX, posY, posZ) == block)
+		if(event.world.getChunkFromBlockCoords((int)event.x, (int)event.z).getBlock(posX, posY, posZ) == block) {
 			event.setResult(Event.Result.DENY);
- 		else if(event.entityLiving instanceof IMob){
+			return;
+		}
+
+		if(checkPlayer){
+			EntityPlayer player = event.world.getClosestPlayer(event.x, event.y, event.z, (double)distance);
+			if(player == null) {
+				event.setResult(Event.Result.DENY);
+				return;
+			}
+		}
+
+		if(event.entityLiving instanceof IMob){
 			int tmp = event.world.skylightSubtracted;
 			event.world.skylightSubtracted = 15;
 			int light = event.world.getBlockLightValue((int)event.x,(int)event.y,(int)event.z);

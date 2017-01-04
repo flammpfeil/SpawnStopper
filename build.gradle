@@ -11,19 +11,25 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.1-SNAPSHOT'
+        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
 }
 
 apply plugin: 'forge'
 
-version = "mc1.7.2-r2"
+version = "mc1.7.10-r1"
 group= "mods.flammpfeil.spawnstopper" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "SpawnStopper"
 
 minecraft {
-    version = "1.7.2-10.12.0.1025"
+    version = "1.7.10-10.13.4.1614-1.7.10"
     assetDir = "eclipse/assets"
+
+    //static final boolean isRelease = /*@IS_RELEASE@*/ false;
+    replace '@IS_RELEASE@', '*/true;//'
+
+    replace '@VERSION@', project.version
+    replace '@MC_VERSION@', version
 }
 processResources
 {
@@ -40,12 +46,6 @@ processResources
         exclude 'mcmod.info'
     }
 }
-
-
-tasks.withType(Compile) {
-    options.encoding = 'UTF-8'
-}
-
 
 jar {
     manifest {
